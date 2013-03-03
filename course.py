@@ -5,6 +5,7 @@ import re
 import sys
 import json
 
+
 for line in sys.stdin:
     if not line:
         continue

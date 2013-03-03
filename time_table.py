@@ -165,9 +165,6 @@ def find_best_time_table(input):
                     constraints.append(v == 0)
                     continue
                 constraints.append(v <= c[cid][slot])
-                if applicant not in c:
-                    # 講座担当者でなければ上記の条件で十分
-                    continue
                 for cid2, course in enumerate(input['courses']):
                     if course['name'] == applicant:
                         constraints.append(v <= 1 - c[cid2][slot])
