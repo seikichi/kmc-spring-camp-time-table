@@ -107,6 +107,10 @@ def find_best_time_table(input):
     for applicant in w:
         for slot in timeslots:
             constraints.append(sum(w[applicant][cid][slot] for cid in w[applicant]) <= 1)
+    ## 同じ講座は1回しか見ない
+    for applicant in w:
+        for cid in w[applicant]:
+            constraints.append(sum(w[applicant][cid].values()) <= 1)
     ## input['time_slots'] に従ってコマ数設定
     for t, n in input['time_slots'].items():
         t = int(t)
@@ -120,6 +124,7 @@ def find_best_time_table(input):
     solver = CPLEX()
     solution = solver.maximize(objective, constraints)
     if solution:
+        print('objective value: {0}'.format(solution.objective_value))
         for sid, session in enumerate(input['sessions']):
             sname = session['name']
             rooms = session['rooms']
@@ -134,9 +139,12 @@ def find_best_time_table(input):
                             if solution[c[cid][slot]]:
                                 names.append(input['courses'][cid]['name'])
                         print(', '.join(names))
-            # for cid in c:
-            #     for cslot in c[cid]:
-            #         if solution[c] and cslot[]
+        for applicant in w:
+            for cid in w[applicant]:
+                if all(not solution[w[applicant][cid][slot]] for slot in w[applicant][cid]):
+                    print('{0} さんは {1} さんの {2} という講座を見れません'.format(applicant,
+                                                                                    input['courses'][cid]['name'],
+                                                                                    input['courses'][cid]['title']))
 
 
 def output_time_table(time_table):
