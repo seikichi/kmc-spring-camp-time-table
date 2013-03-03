@@ -120,6 +120,22 @@ def find_best_time_table(input):
                 if cslot[0] == t:
                     lhs += c[cid][cslot]
         constraints.append(lhs == n)
+    ## 同じ人が同一時間帯に複数の講座を持つことはできない
+    for cid1, course1 in enumerate(input['courses']):
+        for cid2, course2 in list(enumerate(input['courses']))[cid1 + 1:]:
+            if course1['name'] == course2['name']:
+                for slot in timeslots:
+                    constraints.append(c[cid1][slot] + c[cid2][slot] <= 1)
+    ## 花背に存在しなければ講座担当できない
+    for cid, course in enumerate(input['courses']):
+        session_names = [s['name'] for s in input['sessions']]
+        name = course['name']
+        p = input['participants'][name]
+        first_sid, last_sid =  session_names.index(p['first']), session_names.index(p['last'])
+        for slot in timeslots:
+            sid = slot[1]
+            if sid < first_sid or last_sid < sid:
+                constraints.append(c[cid][slot] == 0)
     # ソルバで求解
     solver = CPLEX()
     solution = solver.maximize(objective, constraints)
