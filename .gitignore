@@ -1,0 +1,10 @@
+*~
+*.log
+*.lp
+*.sol
+*.pyc
+__pycache__/
+
+hoge
+fuga
+memo
