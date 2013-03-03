@@ -126,12 +126,19 @@ def find_best_time_table(input):
             if course1['name'] == course2['name']:
                 for slot in timeslots:
                     constraints.append(c[cid1][slot] + c[cid2][slot] <= 1)
+    ## 参加者がいつ花背にいるのか
+    participants_first_sid = {}
+    participants_last_sid = {}
+    session_names = [s['name'] for s in input['sessions']]
+    for name in input['participants']:
+        p = input['participants'][name]
+        participants_first_sid[name] = session_names.index(p['first'])
+        participants_last_sid[name] = session_names.index(p['last'])
     ## 花背に存在しなければ講座担当できない
     for cid, course in enumerate(input['courses']):
-        session_names = [s['name'] for s in input['sessions']]
         name = course['name']
-        p = input['participants'][name]
-        first_sid, last_sid =  session_names.index(p['first']), session_names.index(p['last'])
+        first_sid = participants_first_sid[name]
+        last_sid = participants_last_sid[name]
         for slot in timeslots:
             sid = slot[1]
             if sid < first_sid or last_sid < sid:
@@ -144,26 +151,48 @@ def find_best_time_table(input):
         for slot in timeslots:
             if slot[0] not in times:
                 constraints.append(c[cid][slot] == 0)
-    ## 講座を見れる条件
+    ## 講座を見れる条件 (applicant, cid, slot)
+    ## - slot の時刻にapplicantが花背にいなければ無理
+    ## - slot の時刻にcidの講座が行なわれていなければダメ
+    ## - slot の時刻にapplicantの講座が行われているとダメ
+    for applicant in w:
+        for cid in w[applicant]:
+            for slot in timeslots:
+                sid = slot[1]
+                v = w[applicant][cid][slot]
+                if (sid < participants_first_sid[applicant] or
+                    participants_last_sid[applicant] < sid):
+                    constraints.append(v == 0)
+                    continue
+                constraints.append(v <= c[cid][slot])
+                if applicant not in c:
+                    # 講座担当者でなければ上記の条件で十分
+                    continue
+                for cid2, course in enumerate(input['courses']):
+                    if course['name'] == applicant:
+                        constraints.append(v <= 1 - c[cid2][slot])
     # ソルバで求解
     solver = CPLEX()
     solution = solver.maximize(objective, constraints)
+    time_table = []
     if solution:
         print('objective value: {0}'.format(solution.objective_value))
         for sid, session in enumerate(input['sessions']):
             sname = session['name']
             rooms = session['rooms']
             stime = session['time']
+            ret = {'name': sname, 'rooms': rooms, 'time': stime, 'courses': []}
             for t in s[sid]:
                 if solution[s[sid][t]]:
-                    print('{0} => {1}'.format(sname, t))
+                    ret['slot'] = t
                     for i in range(stime // t):
-                        names = []
+                        courses = []
                         slot = (t, sid, i)
                         for cid in c:
                             if solution[c[cid][slot]]:
-                                names.append(input['courses'][cid]['name'])
-                        print(', '.join(names))
+                                courses.append((input['courses'][cid]['name'], input['courses'][cid]['title']))
+                        ret['courses'].append(courses)
+            time_table.append(ret)
         for applicant in w:
             for cid in w[applicant]:
                 if all(not solution[w[applicant][cid][slot]] for slot in w[applicant][cid]):
@@ -171,9 +200,20 @@ def find_best_time_table(input):
                                                                                     input['courses'][cid]['name'],
                                                                                     input['courses'][cid]['title']))
 
+        return time_table
+
 
 def output_time_table(time_table):
-    pass
+    print('|日程|時間|部屋1|講師|部屋2|講師|')
+    for session in time_table:
+        sname = session['name']
+        slot = session['slot']
+        for i, courses in enumerate(session['courses']):
+            print('|{0} {1}|{2}|{3}|{4}|{5}|{6}|'.format(sname, i + 1, slot,
+                                                         courses[0][1], courses[0][0],
+                                                         courses[1][1], courses[1][0]
+                                                         ))
+
 
 
 if __name__ == '__main__':
