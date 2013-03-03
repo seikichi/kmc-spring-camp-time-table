@@ -136,6 +136,15 @@ def find_best_time_table(input):
             sid = slot[1]
             if sid < first_sid or last_sid < sid:
                 constraints.append(c[cid][slot] == 0)
+    ## 希望時間 (強制)
+    for cid, course in enumerate(input['courses']):
+        times = course['times']
+        if not times:
+            continue
+        for slot in timeslots:
+            if slot[0] not in times:
+                constraints.append(c[cid][slot] == 0)
+    ## 講座を見れる条件
     # ソルバで求解
     solver = CPLEX()
     solution = solver.maximize(objective, constraints)
