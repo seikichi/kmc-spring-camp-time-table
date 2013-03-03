@@ -10,23 +10,23 @@
 |wacky|未定|60 or 90|候補：仮想化、arch linux|||seikichi, tyage, possum, kirita|
 |gire|仮装学概論|60|詳しい内容については、[[シラバス:https://www.kmc.gr.jp/pukiwiki/index.php?gire#y8660883]]を参照のこと。||||
 |mamopm|||ここ2か月プログラムに触ってすらないことに気付いた||||
-|relsa|ぼくらの情報推薦|90|この講座を受講している人は他にこんな講座を受講しています。アナタにオススメの講座はこちらです、な内容。|amazonで買いすぎちゃう人||kirita|
+|relsa|ぼくらの情報推薦|90|この講座を受講している人は他にこんな講座を受講しています。アナタにオススメの講座はこちらです、な内容。|amazonで買いすぎちゃう人|tsutcho|kirita, jf|
 |lunan||90|意思決定とか|||gire|
 |jf712|||||||
 |madaragi|丸と棒からはじめるゲームアニメーション|60|2D横スクロールアクションゲームでのキャラアニメーションの描き方について|アニメ描いてみたいなと思ってるけどいまいち始められないでいるそこのあなた||gire|
 |madaragi|漫画の描き方|60|なぁそろそろ漫画描いてみようぜ|キャラを動かしたりお話を伝えたいと思ってる人||gire, hidesys|
-|uiureo|インターネット糞野郎の逆襲|90|HTML5,WebSocket,WebRTCなどの新しいWeb技術を使って遊びます。JavaScriptを駆け足で説明しつつ、一緒に手を動かして遊びます。Web技術なんかすごいという気分にさせるのが目標。JS等の知識は前提としません。Google Chromeを入れておいてください|インターネット糞野郎||seikichi, possum, tuda, ir5, tyage, hidesys|
-|crys|ソフトウェアテスト||例会講座でやったっぽいのをもうちょい深く広くゆるふわに(内容は開発中のものであり実物とは異なる場合があります)|プログラムの読み書きできる人|||
-|kirita|ギターのエフェクタとjsの話|90|信号処理（こっちがメイン）、Web Audio APIとか? ２つ別の話をするみたいな感じになりそう|||hidesys, tuda|
+|uiureo|インターネット糞野郎の逆襲|90|HTML5,WebSocket,WebRTCなどの新しいWeb技術を使って遊びます。JavaScriptを駆け足で説明しつつ、一緒に手を動かして遊びます。Web技術なんかすごいという気分にさせるのが目標。JS等の知識は前提としません。Google Chromeを入れておいてください|インターネット糞野郎||seikichi, possum, tuda, ir5, tyage, hidesys, jf|
+|crys|ソフトウェアテスト||例会講座でやったっぽいのをもうちょい深く広くゆるふわに(内容は開発中のものであり実物とは異なる場合があります)|プログラムの読み書きできる人|tsutcho||
+|kirita|ギターのエフェクタとjsの話|90|信号処理（こっちがメイン）、Web Audio APIとか? ２つ別の話をするみたいな感じになりそう|||hidesys, tuda, jf|
 |tuda|→微分方程式で殴る(%%物理%%数学)|90|あくまでゆるふわな攻撃力で行きたい。有限要素法とか補間とかの話しをすると思いmath|||seikichi, asi1024|
 |hanazuki|未定|90|言語かロジックの話をしようかな……|||seikichi, tuda,ir5, asi1024, hidesys|
 |possum|未定|希望無し|電子錠。主にハードウェア周りで電子工作初歩のことを。|||kirita|
-|atmonad|||||||
 |ir5||90|計算量理論絡みの話(Cook-Levinの定理とか?) 60分枠になった場合は計算量入門みたいな話にする|コンピュータをメタ的な視点で捉えたい人 / PとかNPとかについて知りたい(or復習したい)人 / SATがNP完全な理由を知りたい人||asi1024, kirita|
-|seikichi|未定|90 or 120|Tumblrとか二次元萌え画像を相手に機械学習とかデータマイニングっぽい話します．Deep Learningとかテンソル分解とか話したい (準備する時間あるのか謎) |学部1回生でも大丈夫な内容にします||possum, crys, tyage, asi1024, kirita, astatine, hidesys, uiureo|
-|nojima|未定|60 or 90|身近なデータセット(IRCログとか内部Wikiとか)を使ってデータマイニング的な話ができたらいいなぁ(願望|誰でも||seikichi, possum, kirita, astatine, hidesys, uiureo|
+|seikichi|未定|90 or 120|Tumblrとか二次元萌え画像を相手に機械学習とかデータマイニングっぽい話します．Deep Learningとかテンソル分解とか話したい (準備する時間あるのか謎) |学部1回生でも大丈夫な内容にします|tsutcho|possum, crys, tyage, asi1024, kirita, astatine, hidesys, uiureo, jf|
+|nojima|未定|60 or 90|身近なデータセット(IRCログとか内部Wikiとか)を使ってデータマイニング的な話ができたらいいなぁ(願望|誰でも||seikichi, possum, kirita, astatine, hidesys, uiureo, jf|
 |dis|hengbandで見る*old*sourceの恐怖|90|枠なかったら引っ込みます。10年以上熟成されたヴィンテージコードを眺めてほっこり。|Cのソース読む環境が必要。WindowsならVC++があると幸せになれそう。||possum,seikichi, crys|
 |okabi|||||||
 |ohai|PKIの基本|60|30分でもよい|セキュリティに興味のある人||possum, kirita, hidesys, uiureo|
-|hidesys|twitterクラスタ分析 ――KMC新2回生のハブ・パーソンを見つけよう――|90 or 60|卒論のネタを再利用して良いのなら、東シベリアにおけるトナカイ遊牧について無限に語ります。あと、ぼくが留年した経緯とその対策についても少し。|twitterかトナカイに興味があるひと||possum, uiureo|
+|hidesys|twitterクラスタ分析 ――KMC新2回生のハブ・パーソンを見つけよう――|90 or 60|卒論のネタを再利用して良いのなら、東シベリアにおけるトナカイ遊牧について無限に語ります。あと、ぼくが留年した経緯とその対策についても少し。|twitterかトナカイに興味があるひと|tsutcho|possum, uiureo|
 |astatine|物理学（相対性理論？）|?|初参加者が受けるべき洗礼と聞いて|物理で小突いても大丈夫な人||asi1024|
+|hideya|わペド2 ～作問編～&br;(私はペンシルパズルでドライアイになりました2)|90以上|ニコリのペンシルパズル[[ぬりかべ:http://www.nikoli.com/ja/puzzles/nurikabe/rule.html]]の問題を実際に作ってみよう|ぬりかべがある程度解ける人&br;(サンプル作成中 少し待ってね)||asi1024|

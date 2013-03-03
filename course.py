@@ -11,7 +11,8 @@ for line in sys.stdin:
     line = line.split('|')
     name = line[1]
     applicants = re.split(r'[, ]+', line[-2]) if line[-2] else []
+    applicants.extend(re.split(r'[, ]+', line[-3]) if line[-3] else [])
     times = [int(t) for t in re.split(r'[^0-9]+', line[3]) if t]
-    d = {"name": name, "applicants": applicants, "times": times}
-    print('        {0},'.format(json.dumps(d)))
-
+    title = line[2]
+    d = {"name": name, "applicants": applicants, "times": times, "title": title}
+    print('        {0},'.format(eval(json.dumps(d))).replace('\'', '"'))
