@@ -381,17 +381,18 @@ class CPLEX(Solver):
 
 
 class SCIP(Solver):
-    def __init__(self, filename='scip-input.lp', quiet=False):
+    def __init__(self, filename='scip-input.lp', quiet=False, path='scip'):
         self.filename = filename
         self.quiet = quiet
+        self.path = path
 
     def _optimize(self):
         subprocess.call('rm -f {0}.sol'.format(self.filename), shell=True)
-        commands = 'scip {1}' \
+        commands = '{2} {1}' \
                    ' -c "read {0}"' \
                    ' -c "optimize"' \
                    ' -c "write solution {0}.sol"' \
-                   ' -c "q"'.format(self.filename, '-q' if self.quiet else '')
+                   ' -c "q"'.format(self.filename, '-q' if self.quiet else '', self.path)
         # subprocess.call(commands, shell=True)
         os.system(commands)
 

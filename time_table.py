@@ -3,7 +3,7 @@
 
 import sys
 import json
-from milp import CPLEX, BinaryVariable
+from milp import SCIP, CPLEX, BinaryVariable
 
 
 def read_input_file(filename):
@@ -45,7 +45,7 @@ def read_input_file(filename):
         return input
 
 
-def find_best_time_table(input):
+def find_best_time_table(input, solver):
     # timeslots 列挙
     timeslots = []
     for time in map(int, input['time_slots'].keys()):
@@ -169,7 +169,6 @@ def find_best_time_table(input):
                     if course['name'] == applicant:
                         constraints.append(v <= 1 - c[cid2][slot])
     # ソルバで求解
-    solver = CPLEX()
     solution = solver.maximize(objective, constraints)
     time_table = []
     if solution:
@@ -214,9 +213,19 @@ def output_time_table(time_table):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
-        print('Usage: time_table.py input.json', file=sys.stderr)
+    from warnings import warn
+    from optparse import OptionParser
+    parser = OptionParser()
+    parser.add_option("--scip", dest="scip", help="path to a SCIP solver", metavar="PATH")
+    options, args = parser.parse_args()
+
+    if len(args) != 1:
+        warning('Usage: python3 time_table.py input.json [options]')
         exit(-1)
-    input = read_input_file(sys.argv[1])
-    time_table = find_best_time_table(input)
+    if options.scip:
+        solver = SCIP(path=options.scip)
+    else:
+        solver = CPLEX()
+    input = read_input_file(args[0])
+    time_table = find_best_time_table(input, solver)
     output_time_table(time_table)
