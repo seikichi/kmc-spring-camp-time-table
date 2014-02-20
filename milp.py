@@ -314,7 +314,9 @@ class Solver(object):
                file=sys.stderr)
         with open(self.filename, 'w') as f:
             print('min' if is_minimize else 'max', file=f)
-            print('  {0}'.format(str(objective)), file=f)
+            print(' + \n'.join(
+                '  {0}'.format(str(objective)).split(' + ')),
+                file=f)
             print('subject to', file=f)
             for i, c in enumerate(constraints):
                 print('  c{0}: {1}'.format(i, c), file=f)
