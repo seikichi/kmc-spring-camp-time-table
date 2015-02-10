@@ -5,9 +5,13 @@ import sys
 import json
 from milp import SCIP, CPLEX, BinaryVariable
 
+import sys
+sys.stdin = open(sys.stdin.fileno(), 'r', encoding='utf-8')
+sys.stdout = open(sys.stdout.fileno(), 'w', encoding='utf-8')
+sys.stderr = open(sys.stderr.fileno(), 'w', encoding='utf-8')
 
 def read_input_file(filename):
-    with open(filename) as f:
+    with open(filename, encoding='utf8') as f:
         input = json.loads(f.read())
         # 講座数は正しい？
         all_time_slots_num = sum(input['time_slots'].values())
