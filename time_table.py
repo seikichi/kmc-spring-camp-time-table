@@ -213,14 +213,14 @@ def output_time_table(time_table):
 
 
 if __name__ == '__main__':
-    from warnings import warn
+    import sys
     from optparse import OptionParser
     parser = OptionParser()
     parser.add_option("--scip", dest="scip", help="path to a SCIP solver", metavar="PATH")
     options, args = parser.parse_args()
 
     if len(args) != 1:
-        warning('Usage: python3 time_table.py input.json [options]')
+        print('Usage: python3 time_table.py input.json [options]', file=sys.stderr)
         exit(-1)
     if options.scip:
         solver = SCIP(path=options.scip)
