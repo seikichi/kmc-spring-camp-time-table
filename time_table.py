@@ -209,10 +209,13 @@ def output_time_table(time_table):
         sname = session['name']
         slot = session['slot']
         for i, courses in enumerate(session['courses']):
-            print('|{0} {1}|{2}|{3}|{4}|{5}|{6}|'.format(sname, i + 1, slot,
-                                                         courses[0][1], courses[0][0],
-                                                         courses[1][1], courses[1][0]
-                                                         ))
+            if len(courses) == 1:
+                print('|{0} {1}|{2}|{3}|{4}|||'.format(sname, i + 1, slot,
+                                                       courses[0][1], courses[0][0]))
+            else:
+                print('|{0} {1}|{2}|{3}|{4}|{5}|{6}|'.format(sname, i + 1, slot,
+                                                             courses[0][1], courses[0][0],
+                                                             courses[1][1], courses[1][0]))
 
 
 

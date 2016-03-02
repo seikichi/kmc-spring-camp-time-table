@@ -392,6 +392,7 @@ class SCIP(Solver):
         subprocess.call('rm -f {0}.sol'.format(self.filename), shell=True)
         commands = '{2} {1}' \
                    ' -c "read {0}"' \
+                   ' -c "set limits time 60" ' \
                    ' -c "optimize"' \
                    ' -c "write solution {0}.sol"' \
                    ' -c "q"'.format(self.filename, '-q' if self.quiet else '', self.path)
@@ -409,9 +410,7 @@ class SCIP(Solver):
         if not os.path.exists(self.filename):
             return None
         with open('{0}.sol'.format(self.filename)) as f:
-            line = f.readline().strip()
-            if line != 'solution status: optimal solution found':
-                return None
+            f.readline() # skip
             solution.objective_value = float(f.readline().strip().split()[-1])
             for line in f:
                 line = line.strip().split()
