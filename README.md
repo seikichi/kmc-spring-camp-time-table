@@ -6,7 +6,7 @@
 
 ```
 > docker build -t seikichi/spring-camp .
-> cat 2013.json | docuer run --rm -i seikichi/spring-camp
+> cat 2013.json | docker run --rm -i seikichi/spring-camp
 ```
 
 ## これは何?
